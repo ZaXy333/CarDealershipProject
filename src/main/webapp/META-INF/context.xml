@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/CarDealershipProject"/>
+<Context antiJARLocking="true" path="/CarDealershipProject">
+    <Realm localDataSource="false"
+           className="org.apache.catalina.realm.DataSourceRealm"
+           dataSourceName="jdbc/dealershipAuth"
+           userTable="users"
+           userNameCol="user_name"
+           userCredCol="user_pass"
+           userRoleTable="user_roles"
+           roleNameCol="role_name"/>
+
+    <ResourceLink name="jdbc/dealershipApp"
+                  global="jdbc/dealershipApp"
+                  type="javax.sql.DataSource"/>
+</Context>
