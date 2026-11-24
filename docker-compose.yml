@@ -1,0 +1,30 @@
+services:
+  auth-db:
+    image: postgres:16-alpine
+    container_name: dealership_auth_db
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+      - ./docker/init-auth.sql:/docker-entrypoint-initdb.d/init-auth.sql
+
+  app-db:
+    image: postgres:16-alpine
+    container_name: dealership_app_db
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - app_db_data:/var/lib/postgresql/data
+      - ./docker/init-app.sql:/docker-entrypoint-initdb.d/init-app.sql
+
+volumes:
+  auth_db_data:
+  app_db_data:
