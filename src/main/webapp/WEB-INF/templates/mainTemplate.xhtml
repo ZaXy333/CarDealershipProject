@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view locale="#{sessionBean.locale}">
+        <h:head>
+            <title>#{msgs.appTitle}</title>
+            <h:outputStylesheet library="css" name="style.css"/>
+        </h:head>
+        <h:body>
+            <h:form id="navForm">
+                <div class="topbar">
+                    <span class="topbar-title">#{msgs.appTitle} — #{appConfigBean.dealershipName}</span>
+                    <div>
+                        <span>#{msgs.userLoggedAs}: <strong>#{request.remoteUser}</strong> | #{msgs.langLabel}:</span>
+                        <h:commandButton value="PL" action="#{sessionBean.switchLanguage('pl')}" styleClass="lang-btn"/>
+                        <h:commandButton value="EN" action="#{sessionBean.switchLanguage('en')}" styleClass="lang-btn"/>
+                    </div>
+                </div>
+
+                <div class="navbar">
+                    <h:commandButton value="#{msgs.navHome}" action="goHome" styleClass="nav-btn"/>
+                    <h:commandButton value="#{msgs.navCollection}" action="goCollection" styleClass="nav-btn"/>
+                    <h:commandButton value="#{msgs.navAjax}" action="goAjax" styleClass="nav-btn"/>
+                    <h:commandButton value="#{msgs.navDatabase}" action="goDatabase" styleClass="nav-btn"/>
+                    <h:commandButton value="#{msgs.navLogout}" action="goLogout" styleClass="nav-btn nav-btn-danger"/>
+                </div>
+
+                <div class="status-bar">
+                    <span>#{msgs.statsGlobalViews}: <strong>#{appConfigBean.totalViews}</strong></span>
+                    <span>#{msgs.statsSessionActions}: <strong>#{sessionBean.userActionCount}</strong></span>
+                    <span>#{msgs.statsEuroRate}: <strong>#{appConfigBean.euroRate} PLN</strong></span>
+                    <span>#{sessionBean.dealershipSummary}</span>
+                </div>
+            </h:form>
+
+            <div class="container">
+                <div class="promo-banner">
+                    #{msgs.promoLabel}: #{promoBannerBean.promoTitle} (-#{promoBannerBean.discountPercent}%)
+                </div>
+
+                <ui:insert name="content">
+                    Domyślna zawartość
+                </ui:insert>
+            </div>
+        </h:body>
+    </f:view>
+</html>
