@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h2>Logowanie do systemu</h2>
-        <h:form pt:method="post" pt:action="j_security_check">
+        <h:form pt:method="post" pt:action="#{facesContext.externalContext.encodeActionURL('j_security_check')}">
             <div>
                 <label for="j_username">Login:</label>
                 <h:inputText pt:name="j_username" id="j_username"/>
