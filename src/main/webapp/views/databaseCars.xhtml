@@ -10,86 +10,86 @@
 
         <h:form id="dbCarsForm">
             <div class="inline-form">
-                <h:outputLabel for="dbBrand" value="Marka:"/>
+                <h:outputLabel for="dbBrand" value="#{msgs.colBrand}:"/>
                 <h:inputText id="dbBrand" value="#{databaseCarsBean.newBrand}"/>
 
-                <h:outputLabel for="dbModel" value="Model:"/>
+                <h:outputLabel for="dbModel" value="#{msgs.colModel}:"/>
                 <h:inputText id="dbModel" value="#{databaseCarsBean.newModel}"/>
 
-                <h:outputLabel for="dbYear" value="Rocznik:"/>
+                <h:outputLabel for="dbYear" value="#{msgs.colYear}:"/>
                 <h:inputText id="dbYear" value="#{databaseCarsBean.newProductionYear}"/>
 
-                <h:outputLabel for="dbMileage" value="Przebieg (km):"/>
+                <h:outputLabel for="dbMileage" value="#{msgs.colMileage}:"/>
                 <h:inputText id="dbMileage" value="#{databaseCarsBean.newMileage}"/>
 
-                <h:outputLabel for="dbFuel" value="Paliwo:"/>
+                <h:outputLabel for="dbFuel" value="#{msgs.colFuel}:"/>
                 <h:inputText id="dbFuel" value="#{databaseCarsBean.newFuelType}"/>
 
-                <h:outputLabel for="dbPrice" value="Cena (PLN):"/>
+                <h:outputLabel for="dbPrice" value="#{msgs.colPrice}:"/>
                 <h:inputText id="dbPrice" value="#{databaseCarsBean.newPrice}"/>
 
-                <h:commandButton value="+ Zapisz w bazie" action="#{databaseCarsBean.addCar()}" styleClass="nav-btn">
-                    <f:ajax execute="@form" render="@form"/>
+                <h:commandButton value="#{msgs.btnAddDb}" action="#{databaseCarsBean.addCar()}" styleClass="nav-btn">
+                    <f:ajax execute="@form" render="@form :navForm"/>
                 </h:commandButton>
             </div>
 
             <h:dataTable id="dbCarsTable" value="#{databaseCarsBean.cars}" var="car" styleClass="data-table">
                 <h:column>
-                    <f:facet name="header">ID</f:facet>
+                    <f:facet name="header">#{msgs.colId}</f:facet>
                     #{car.id}
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Marka</f:facet>
+                    <f:facet name="header">#{msgs.colBrand}</f:facet>
                     <h:outputText value="#{car.brand}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.brand}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Model</f:facet>
+                    <f:facet name="header">#{msgs.colModel}</f:facet>
                     <h:outputText value="#{car.model}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.model}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Rocznik</f:facet>
+                    <f:facet name="header">#{msgs.colYear}</f:facet>
                     <h:outputText value="#{car.productionYear}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.productionYear}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Przebieg (km)</f:facet>
+                    <f:facet name="header">#{msgs.colMileage}</f:facet>
                     <h:outputText value="#{car.mileage}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.mileage}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Paliwo</f:facet>
+                    <f:facet name="header">#{msgs.colFuel}</f:facet>
                     <h:outputText value="#{car.fuelType}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.fuelType}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Cena (PLN)</f:facet>
+                    <f:facet name="header">#{msgs.colPrice}</f:facet>
                     <h:outputText value="#{car.price}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.price}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Akcje (JPA/DAO)</f:facet>
-                    <h:commandButton value="Edytuj" action="#{databaseCarsBean.enableEdit(car)}"
+                    <f:facet name="header">#{msgs.colActionsDb}</f:facet>
+                    <h:commandButton value="#{msgs.btnEdit}" action="#{databaseCarsBean.enableEdit(car)}"
                                      rendered="#{not car.editable}" styleClass="btn-sm btn-edit">
                         <f:ajax execute="@this" render="@form"/>
                     </h:commandButton>
 
-                    <h:commandButton value="Zapisz" action="#{databaseCarsBean.saveEdit(car)}"
+                    <h:commandButton value="#{msgs.btnSave}" action="#{databaseCarsBean.saveEdit(car)}"
                                      rendered="#{car.editable}" styleClass="btn-sm btn-save">
-                        <f:ajax execute="@form" render="@form"/>
+                        <f:ajax execute="@form" render="@form :navForm"/>
                     </h:commandButton>
 
-                    <h:commandButton value="Usuń" action="#{databaseCarsBean.deleteCar(car)}"
+                    <h:commandButton value="#{msgs.btnDelete}" action="#{databaseCarsBean.deleteCar(car)}"
                                      styleClass="btn-sm btn-del">
-                        <f:ajax execute="@this" render="@form"/>
+                        <f:ajax execute="@this" render="@form :navForm"/>
                     </h:commandButton>
                 </h:column>
             </h:dataTable>

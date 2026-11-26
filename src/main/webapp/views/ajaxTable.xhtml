@@ -10,68 +10,68 @@
 
         <h:form id="ajaxForm">
             <div class="inline-form">
-                <h:outputLabel for="aBrand" value="Marka:"/>
+                <h:outputLabel for="aBrand" value="#{msgs.colBrand}:"/>
                 <h:inputText id="aBrand" value="#{ajaxOffersBean.brand}"/>
 
-                <h:outputLabel for="aModel" value="Model:"/>
+                <h:outputLabel for="aModel" value="#{msgs.colModel}:"/>
                 <h:inputText id="aModel" value="#{ajaxOffersBean.model}"/>
 
-                <h:outputLabel for="aYear" value="Rocznik:"/>
+                <h:outputLabel for="aYear" value="#{msgs.colYear}:"/>
                 <h:inputText id="aYear" value="#{ajaxOffersBean.year}"/>
 
-                <h:outputLabel for="aPrice" value="Cena (PLN):"/>
+                <h:outputLabel for="aPrice" value="#{msgs.colPrice}:"/>
                 <h:inputText id="aPrice" value="#{ajaxOffersBean.price}"/>
 
-                <h:commandButton value="+ Dodaj (AJAX)" action="#{ajaxOffersBean.addAjaxOffer()}" styleClass="nav-btn">
-                    <f:ajax execute="@form" render="@form"/>
+                <h:commandButton value="#{msgs.btnAddAjax}" action="#{ajaxOffersBean.addAjaxOffer()}" styleClass="nav-btn">
+                    <f:ajax execute="@form" render="@form :navForm"/>
                 </h:commandButton>
             </div>
 
             <h:dataTable id="ajaxTable" value="#{ajaxOffersBean.ajaxOffers}" var="car" styleClass="data-table">
                 <h:column>
-                    <f:facet name="header">ID</f:facet>
+                    <f:facet name="header">#{msgs.colId}</f:facet>
                     #{car.id}
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Marka</f:facet>
+                    <f:facet name="header">#{msgs.colBrand}</f:facet>
                     <h:outputText value="#{car.brand}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.brand}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Model</f:facet>
+                    <f:facet name="header">#{msgs.colModel}</f:facet>
                     <h:outputText value="#{car.model}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.model}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Rocznik</f:facet>
+                    <f:facet name="header">#{msgs.colYear}</f:facet>
                     <h:outputText value="#{car.year}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.year}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Cena (PLN)</f:facet>
+                    <f:facet name="header">#{msgs.colPrice}</f:facet>
                     <h:outputText value="#{car.price}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.price}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Akcje (AJAX)</f:facet>
-                    <h:commandButton value="Edytuj" action="#{ajaxOffersBean.enableEdit(car)}"
+                    <f:facet name="header">#{msgs.colActionsAjax}</f:facet>
+                    <h:commandButton value="#{msgs.btnEdit}" action="#{ajaxOffersBean.enableEdit(car)}"
                                      rendered="#{not car.editable}" styleClass="btn-sm btn-edit">
                         <f:ajax execute="@this" render="@form"/>
                     </h:commandButton>
 
-                    <h:commandButton value="Zapisz" action="#{ajaxOffersBean.saveEdit(car)}"
+                    <h:commandButton value="#{msgs.btnSave}" action="#{ajaxOffersBean.saveEdit(car)}"
                                      rendered="#{car.editable}" styleClass="btn-sm btn-save">
-                        <f:ajax execute="@form" render="@form"/>
+                        <f:ajax execute="@form" render="@form :navForm"/>
                     </h:commandButton>
 
-                    <h:commandButton value="Usuń" action="#{ajaxOffersBean.deleteAjaxOffer(car)}"
+                    <h:commandButton value="#{msgs.btnDelete}" action="#{ajaxOffersBean.deleteAjaxOffer(car)}"
                                      styleClass="btn-sm btn-del">
-                        <f:ajax execute="@this" render="@form"/>
+                        <f:ajax execute="@this" render="@form :navForm"/>
                     </h:commandButton>
                 </h:column>
             </h:dataTable>

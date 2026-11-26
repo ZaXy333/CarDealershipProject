@@ -10,58 +10,58 @@
 
         <h:form id="collectionForm">
             <div class="inline-form">
-                <h:outputLabel for="brand" value="Marka:"/>
+                <h:outputLabel for="brand" value="#{msgs.colBrand}:"/>
                 <h:inputText id="brand" value="#{collectionOffersBean.newBrand}"/>
 
-                <h:outputLabel for="model" value="Model:"/>
+                <h:outputLabel for="model" value="#{msgs.colModel}:"/>
                 <h:inputText id="model" value="#{collectionOffersBean.newModel}"/>
 
-                <h:outputLabel for="year" value="Rocznik:"/>
+                <h:outputLabel for="year" value="#{msgs.colYear}:"/>
                 <h:inputText id="year" value="#{collectionOffersBean.newYear}"/>
 
-                <h:outputLabel for="price" value="Cena (PLN):"/>
+                <h:outputLabel for="price" value="#{msgs.colPrice}:"/>
                 <h:inputText id="price" value="#{collectionOffersBean.newPrice}"/>
 
-                <h:commandButton value="+ Dodaj ofertę" action="#{collectionOffersBean.addOffer()}" styleClass="nav-btn"/>
+                <h:commandButton value="#{msgs.btnAddOffer}" action="#{collectionOffersBean.addOffer()}" styleClass="nav-btn"/>
             </div>
 
             <h:dataTable value="#{collectionOffersBean.offers}" var="car" styleClass="data-table">
                 <h:column>
-                    <f:facet name="header">ID</f:facet>
+                    <f:facet name="header">#{msgs.colId}</f:facet>
                     #{car.id}
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Marka</f:facet>
+                    <f:facet name="header">#{msgs.colBrand}</f:facet>
                     <h:outputText value="#{car.brand}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.brand}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Model</f:facet>
+                    <f:facet name="header">#{msgs.colModel}</f:facet>
                     <h:outputText value="#{car.model}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.model}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Rocznik</f:facet>
+                    <f:facet name="header">#{msgs.colYear}</f:facet>
                     <h:outputText value="#{car.year}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.year}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Cena (PLN)</f:facet>
+                    <f:facet name="header">#{msgs.colPrice}</f:facet>
                     <h:outputText value="#{car.price}" rendered="#{not car.editable}"/>
                     <h:inputText value="#{car.price}" rendered="#{car.editable}" styleClass="table-input"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Akcje</f:facet>
-                    <h:commandButton value="Edytuj" action="#{collectionOffersBean.enableEdit(car)}"
+                    <f:facet name="header">#{msgs.colActions}</f:facet>
+                    <h:commandButton value="#{msgs.btnEdit}" action="#{collectionOffersBean.enableEdit(car)}"
                                      rendered="#{not car.editable}" styleClass="btn-sm btn-edit"/>
-                    <h:commandButton value="Zapisz" action="#{collectionOffersBean.saveEdit(car)}"
+                    <h:commandButton value="#{msgs.btnSave}" action="#{collectionOffersBean.saveEdit(car)}"
                                      rendered="#{car.editable}" styleClass="btn-sm btn-save"/>
-                    <h:commandButton value="Usuń" action="#{collectionOffersBean.deleteOffer(car)}"
+                    <h:commandButton value="#{msgs.btnDelete}" action="#{collectionOffersBean.deleteOffer(car)}"
                                      styleClass="btn-sm btn-del"/>
                 </h:column>
             </h:dataTable>

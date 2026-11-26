@@ -3,10 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Błąd logowania</title>
+        <title>Błąd logowania — AutoElite</title>
+        <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
-    <h:body>
-        <h2>Nieprawidłowy login lub hasło</h2>
-        <h:link value="Spróbuj ponownie" outcome="/login"/>
+    <h:body styleClass="auth-body">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1 class="auth-brand">AutoElite</h1>
+                    <p class="auth-subtitle">Autoryzacja nie powiodła się</p>
+                </div>
+
+                <div class="auth-error">
+                    Nieprawidłowy login lub hasło. Spróbuj ponownie.
+                </div>
+
+                <h:link value="Powrót do logowania" outcome="/views/index" styleClass="auth-submit"/>
+            </div>
+        </div>
     </h:body>
 </html>

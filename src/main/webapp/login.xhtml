@@ -2,24 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Logowanie - Salon Samochodowy</title>
+        <title>Logowanie — AutoElite</title>
+        <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
-    <h:body>
-        <h2>Logowanie do systemu</h2>
-        <h:form pt:method="post" pt:action="#{facesContext.externalContext.encodeActionURL('j_security_check')}">
-            <div>
-                <label for="j_username">Login:</label>
-                <h:inputText pt:name="j_username" id="j_username"/>
+    <h:body styleClass="auth-body">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1 class="auth-brand">AutoElite</h1>
+                    <p class="auth-subtitle">System Zarządzania Salonem Samochodowym</p>
+                </div>
+
+                <h:form prependId="false" p:method="post" p:action="#{request.contextPath}/j_security_check;jsessionid=#{session.id}">
+                    <div class="auth-group">
+                        <label for="j_username">Login</label>
+                        <h:inputText id="j_username" p:name="j_username" p:placeholder="Wpisz login" p:required="required"/>
+                    </div>
+
+                    <div class="auth-group">
+                        <label for="j_password">Hasło</label>
+                        <h:inputSecret id="j_password" p:name="j_password" p:placeholder="Wpisz hasło" p:required="required"/>
+                    </div>
+
+                    <input type="submit" value="Zaloguj się" class="auth-submit"/>
+                </h:form>
             </div>
-            <div>
-                <label for="j_password">Hasło:</label>
-                <h:inputSecret pt:name="j_password" id="j_password"/>
-            </div>
-            <div>
-                <input type="submit" value="Zaloguj"/>
-            </div>
-        </h:form>
+        </div>
     </h:body>
 </html>

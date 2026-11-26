@@ -12,7 +12,7 @@
         <h:body>
             <h:form id="navForm">
                 <div class="topbar">
-                    <span class="topbar-title">#{msgs.appTitle} — #{appConfigBean.dealershipName}</span>
+                    <span class="topbar-title">#{appConfigBean.dealershipName} — #{msgs.appTitle}</span>
                     <div>
                         <span>#{msgs.userLoggedAs}: <strong>#{request.remoteUser}</strong> | #{msgs.langLabel}:</span>
                         <h:commandButton value="PL" action="#{sessionBean.switchLanguage('pl')}" styleClass="lang-btn"/>
