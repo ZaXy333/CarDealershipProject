@@ -103,3 +103,70 @@ body {
     border: 1px solid #86efac;
     border-radius: 4px;
 }
+
+.inline-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 12px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+}
+
+.inline-form input[type="text"] {
+    padding: 6px 8px;
+    border: 1px solid #94a3b8;
+    border-radius: 4px;
+    width: 125px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th {
+    background-color: #1e293b;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+}
+
+.data-table td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 8px 10px;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.table-input {
+    width: 105px;
+    padding: 4px 6px;
+    border: 1px solid #94a3b8;
+    border-radius: 3px;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.btn-edit { background-color: #d97706; }
+.btn-edit:hover { background-color: #b45309; }
+
+.btn-save { background-color: #16a34a; }
+.btn-save:hover { background-color: #15803d; }
+
+.btn-del  { background-color: #dc2626; }
+.btn-del:hover  { background-color: #b91c1c; }

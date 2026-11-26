@@ -2,9 +2,79 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/templates/mainTemplate.xhtml">
     <ui:define name="content">
         <h2>#{msgs.navAjax}</h2>
-        <p>Widok przygotowany pod Etap 6 (tabela CRUD na kolekcji z AJAX).</p>
+
+        <h:form id="ajaxForm">
+            <div class="inline-form">
+                <h:outputLabel for="aBrand" value="Marka:"/>
+                <h:inputText id="aBrand" value="#{ajaxOffersBean.brand}"/>
+
+                <h:outputLabel for="aModel" value="Model:"/>
+                <h:inputText id="aModel" value="#{ajaxOffersBean.model}"/>
+
+                <h:outputLabel for="aYear" value="Rocznik:"/>
+                <h:inputText id="aYear" value="#{ajaxOffersBean.year}"/>
+
+                <h:outputLabel for="aPrice" value="Cena (PLN):"/>
+                <h:inputText id="aPrice" value="#{ajaxOffersBean.price}"/>
+
+                <h:commandButton value="+ Dodaj (AJAX)" action="#{ajaxOffersBean.addAjaxOffer()}" styleClass="nav-btn">
+                    <f:ajax execute="@form" render="@form"/>
+                </h:commandButton>
+            </div>
+
+            <h:dataTable id="ajaxTable" value="#{ajaxOffersBean.ajaxOffers}" var="car" styleClass="data-table">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{car.id}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Marka</f:facet>
+                    <h:outputText value="#{car.brand}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.brand}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Model</f:facet>
+                    <h:outputText value="#{car.model}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.model}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Rocznik</f:facet>
+                    <h:outputText value="#{car.year}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.year}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Cena (PLN)</f:facet>
+                    <h:outputText value="#{car.price}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.price}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Akcje (AJAX)</f:facet>
+                    <h:commandButton value="Edytuj" action="#{ajaxOffersBean.enableEdit(car)}"
+                                     rendered="#{not car.editable}" styleClass="btn-sm btn-edit">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandButton>
+
+                    <h:commandButton value="Zapisz" action="#{ajaxOffersBean.saveEdit(car)}"
+                                     rendered="#{car.editable}" styleClass="btn-sm btn-save">
+                        <f:ajax execute="@form" render="@form"/>
+                    </h:commandButton>
+
+                    <h:commandButton value="Usuń" action="#{ajaxOffersBean.deleteAjaxOffer(car)}"
+                                     styleClass="btn-sm btn-del">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>

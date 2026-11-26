@@ -2,9 +2,97 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/templates/mainTemplate.xhtml">
     <ui:define name="content">
         <h2>#{msgs.navDatabase}</h2>
-        <p>Widok przygotowany pod Etap 7 (baza danych PostgreSQL + JPA/DAO + TO).</p>
+
+        <h:form id="dbCarsForm">
+            <div class="inline-form">
+                <h:outputLabel for="dbBrand" value="Marka:"/>
+                <h:inputText id="dbBrand" value="#{databaseCarsBean.newBrand}"/>
+
+                <h:outputLabel for="dbModel" value="Model:"/>
+                <h:inputText id="dbModel" value="#{databaseCarsBean.newModel}"/>
+
+                <h:outputLabel for="dbYear" value="Rocznik:"/>
+                <h:inputText id="dbYear" value="#{databaseCarsBean.newProductionYear}"/>
+
+                <h:outputLabel for="dbMileage" value="Przebieg (km):"/>
+                <h:inputText id="dbMileage" value="#{databaseCarsBean.newMileage}"/>
+
+                <h:outputLabel for="dbFuel" value="Paliwo:"/>
+                <h:inputText id="dbFuel" value="#{databaseCarsBean.newFuelType}"/>
+
+                <h:outputLabel for="dbPrice" value="Cena (PLN):"/>
+                <h:inputText id="dbPrice" value="#{databaseCarsBean.newPrice}"/>
+
+                <h:commandButton value="+ Zapisz w bazie" action="#{databaseCarsBean.addCar()}" styleClass="nav-btn">
+                    <f:ajax execute="@form" render="@form"/>
+                </h:commandButton>
+            </div>
+
+            <h:dataTable id="dbCarsTable" value="#{databaseCarsBean.cars}" var="car" styleClass="data-table">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{car.id}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Marka</f:facet>
+                    <h:outputText value="#{car.brand}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.brand}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Model</f:facet>
+                    <h:outputText value="#{car.model}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.model}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Rocznik</f:facet>
+                    <h:outputText value="#{car.productionYear}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.productionYear}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Przebieg (km)</f:facet>
+                    <h:outputText value="#{car.mileage}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.mileage}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Paliwo</f:facet>
+                    <h:outputText value="#{car.fuelType}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.fuelType}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Cena (PLN)</f:facet>
+                    <h:outputText value="#{car.price}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.price}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Akcje (JPA/DAO)</f:facet>
+                    <h:commandButton value="Edytuj" action="#{databaseCarsBean.enableEdit(car)}"
+                                     rendered="#{not car.editable}" styleClass="btn-sm btn-edit">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandButton>
+
+                    <h:commandButton value="Zapisz" action="#{databaseCarsBean.saveEdit(car)}"
+                                     rendered="#{car.editable}" styleClass="btn-sm btn-save">
+                        <f:ajax execute="@form" render="@form"/>
+                    </h:commandButton>
+
+                    <h:commandButton value="Usuń" action="#{databaseCarsBean.deleteCar(car)}"
+                                     styleClass="btn-sm btn-del">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>

@@ -2,9 +2,69 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/templates/mainTemplate.xhtml">
     <ui:define name="content">
         <h2>#{msgs.navCollection}</h2>
-        <p>Widok przygotowany pod Etap 5 (tabela CRUD na kolekcji bez AJAX).</p>
+
+        <h:form id="collectionForm">
+            <div class="inline-form">
+                <h:outputLabel for="brand" value="Marka:"/>
+                <h:inputText id="brand" value="#{collectionOffersBean.newBrand}"/>
+
+                <h:outputLabel for="model" value="Model:"/>
+                <h:inputText id="model" value="#{collectionOffersBean.newModel}"/>
+
+                <h:outputLabel for="year" value="Rocznik:"/>
+                <h:inputText id="year" value="#{collectionOffersBean.newYear}"/>
+
+                <h:outputLabel for="price" value="Cena (PLN):"/>
+                <h:inputText id="price" value="#{collectionOffersBean.newPrice}"/>
+
+                <h:commandButton value="+ Dodaj ofertę" action="#{collectionOffersBean.addOffer()}" styleClass="nav-btn"/>
+            </div>
+
+            <h:dataTable value="#{collectionOffersBean.offers}" var="car" styleClass="data-table">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{car.id}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Marka</f:facet>
+                    <h:outputText value="#{car.brand}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.brand}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Model</f:facet>
+                    <h:outputText value="#{car.model}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.model}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Rocznik</f:facet>
+                    <h:outputText value="#{car.year}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.year}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Cena (PLN)</f:facet>
+                    <h:outputText value="#{car.price}" rendered="#{not car.editable}"/>
+                    <h:inputText value="#{car.price}" rendered="#{car.editable}" styleClass="table-input"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Akcje</f:facet>
+                    <h:commandButton value="Edytuj" action="#{collectionOffersBean.enableEdit(car)}"
+                                     rendered="#{not car.editable}" styleClass="btn-sm btn-edit"/>
+                    <h:commandButton value="Zapisz" action="#{collectionOffersBean.saveEdit(car)}"
+                                     rendered="#{car.editable}" styleClass="btn-sm btn-save"/>
+                    <h:commandButton value="Usuń" action="#{collectionOffersBean.deleteOffer(car)}"
+                                     styleClass="btn-sm btn-del"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
